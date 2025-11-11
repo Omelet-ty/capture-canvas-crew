@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,8 @@ import magnetsImage from "@/assets/product-magnets.jpg";
 import magnetsAltImage from "@/assets/product-magnets-alt.jpg";
 
 const ProductsSection = () => {
+  const navigate = useNavigate();
+  
   const products = [
     {
       image: mugImage,
@@ -109,7 +112,18 @@ const ProductsSection = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {products.map((product, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <div className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                  <div 
+                    className="animate-fade-in-up cursor-pointer" 
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    onClick={() => navigate("/product", { 
+                      state: { 
+                        product: {
+                          ...product,
+                          price: parseFloat(product.price.replace('€', ''))
+                        }
+                      } 
+                    })}
+                  >
                     <ProductCard {...product} />
                   </div>
                 </CarouselItem>

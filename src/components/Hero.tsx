@@ -50,17 +50,15 @@ const Hero = () => {
             {/* Slide 1 - Fotoprix Logo */}
             <CarouselItem>
               <div className="text-center animate-fade-in-up py-12">
-                <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-primary/20">
-                  <Camera className="text-primary" size={20} />
-                  <span className="text-sm font-medium text-primary">Estudio Fotográfico Profesional</span>
-                </div>
-
-                <div className="mb-8 max-w-3xl mx-auto">
-                  <img 
-                    src={fotoprixLogo} 
-                    alt="Fotoprix - Estudio Fotográfico Profesional" 
-                    className="w-full h-auto rounded-3xl shadow-glow-primary"
-                  />
+                <div className="mb-8 max-w-4xl mx-auto">
+                  <h1 className="text-8xl md:text-9xl font-black mb-4" style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '0.05em' }}>
+                    <span className="bg-gradient-to-r from-sky-400 via-primary to-secondary bg-clip-text text-transparent drop-shadow-2xl">
+                      FOTOPR
+                    </span>
+                    <span className="bg-gradient-to-r from-secondary via-accent to-sky-400 bg-clip-text text-transparent drop-shadow-2xl">
+                      IX
+                    </span>
+                  </h1>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -83,7 +81,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-sm text-muted-foreground mt-8">
-                  ✨ Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
+                  Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
                 </p>
               </div>
             </CarouselItem>
@@ -91,11 +89,6 @@ const Hero = () => {
             {/* Slide 2 - Main Message */}
             <CarouselItem>
               <div className="text-center animate-fade-in-up py-12">
-                <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-primary/20">
-                  <Camera className="text-primary" size={20} />
-                  <span className="text-sm font-medium text-primary">Estudio Fotográfico Profesional</span>
-                </div>
-
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                     ¡CAPTURA, CREA Y VIVE
@@ -131,7 +124,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-sm text-muted-foreground mt-8">
-                  ✨ Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
+                  Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
                 </p>
               </div>
             </CarouselItem>
