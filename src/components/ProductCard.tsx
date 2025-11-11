@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 
 interface ProductCardProps {
   image: string;
+  altImage?: string;
   title: string;
   description: string;
   price: string;
@@ -13,6 +15,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ 
   image, 
+  altImage,
   title, 
   description, 
   price, 
@@ -20,8 +23,14 @@ const ProductCard = ({
   badge,
   badgeVariant = "default"
 }: ProductCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <Card className="group overflow-hidden hover-lift cursor-pointer border-2 border-border/50 hover:border-primary/50 transition-all duration-300">
+    <Card 
+      className="group overflow-hidden hover-lift cursor-pointer border-2 border-border/50 hover:border-primary/50 transition-all duration-300"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative aspect-square overflow-hidden">
         {badge && (
           <Badge 
@@ -32,9 +41,9 @@ const ProductCard = ({
           </Badge>
         )}
         <img 
-          src={image} 
+          src={isHovered && altImage ? altImage : image} 
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>

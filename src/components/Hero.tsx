@@ -1,8 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-collage.jpg";
+import fotoprixLogo from "@/assets/fotoprix-logo.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { useRef } from "react";
 
 const Hero = () => {
+  const plugin = useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  );
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background with gradient overlay */}
@@ -25,50 +37,106 @@ const Hero = () => {
         <Sparkles size={40} className="opacity-20" />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-primary/20">
-          <Camera className="text-primary" size={20} />
-          <span className="text-sm font-medium text-primary">Estudio Fotográfico Profesional</span>
-        </div>
+      {/* Main content with carousel */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          opts={{
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {/* Slide 1 - Fotoprix Logo */}
+            <CarouselItem>
+              <div className="text-center animate-fade-in-up py-12">
+                <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-primary/20">
+                  <Camera className="text-primary" size={20} />
+                  <span className="text-sm font-medium text-primary">Estudio Fotográfico Profesional</span>
+                </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            ¡CAPTURA, CREA Y VIVE
-          </span>
-          <br />
-          <span className="text-foreground">
-            TUS MEJORES MOMENTOS! 💙📸
-          </span>
-        </h1>
+                <div className="mb-8 max-w-3xl mx-auto">
+                  <img 
+                    src={fotoprixLogo} 
+                    alt="Fotoprix - Estudio Fotográfico Profesional" 
+                    className="w-full h-auto rounded-3xl shadow-glow-primary"
+                  />
+                </div>
 
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-          Convierte cada instante en un recuerdo inolvidable. <br className="hidden md:block" />
-          Personaliza tus fotos, imprime tus emociones y comparte tu historia.
-        </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button 
+                    size="lg" 
+                    className="gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-lg px-8 py-6 rounded-full font-semibold"
+                    onClick={() => window.open('https://github.com', '_blank')}
+                  >
+                    Explora nuestras creaciones
+                    <Sparkles className="ml-2" size={20} />
+                  </Button>
+                  
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all text-lg px-8 py-6 rounded-full font-semibold"
+                  >
+                    Ver servicios
+                  </Button>
+                </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            size="lg" 
-            className="gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-lg px-8 py-6 rounded-full font-semibold"
-            onClick={() => window.open('https://github.com', '_blank')}
-          >
-            Explora nuestras creaciones
-            <Sparkles className="ml-2" size={20} />
-          </Button>
-          
-          <Button 
-            size="lg" 
-            variant="outline"
-            className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all text-lg px-8 py-6 rounded-full font-semibold"
-          >
-            Ver servicios
-          </Button>
-        </div>
+                <p className="text-sm text-muted-foreground mt-8">
+                  ✨ Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
+                </p>
+              </div>
+            </CarouselItem>
 
-        <p className="text-sm text-muted-foreground mt-8">
-          ✨ Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
-        </p>
+            {/* Slide 2 - Main Message */}
+            <CarouselItem>
+              <div className="text-center animate-fade-in-up py-12">
+                <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-primary/20">
+                  <Camera className="text-primary" size={20} />
+                  <span className="text-sm font-medium text-primary">Estudio Fotográfico Profesional</span>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                  <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    ¡CAPTURA, CREA Y VIVE
+                  </span>
+                  <br />
+                  <span className="text-foreground">
+                    TUS MEJORES MOMENTOS!
+                  </span>
+                </h1>
+
+                <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                  Convierte cada instante en un recuerdo inolvidable. <br className="hidden md:block" />
+                  Personaliza tus fotos, imprime tus emociones y comparte tu historia.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button 
+                    size="lg" 
+                    className="gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-lg px-8 py-6 rounded-full font-semibold"
+                    onClick={() => window.open('https://github.com', '_blank')}
+                  >
+                    Explora nuestras creaciones
+                    <Sparkles className="ml-2" size={20} />
+                  </Button>
+                  
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all text-lg px-8 py-6 rounded-full font-semibold"
+                  >
+                    Ver servicios
+                  </Button>
+                </div>
+
+                <p className="text-sm text-muted-foreground mt-8">
+                  ✨ Imprime todas tus fotos favoritas con entrega en tienda gratis en pocos días
+                </p>
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
       </div>
 
       {/* Bottom wave decoration */}
