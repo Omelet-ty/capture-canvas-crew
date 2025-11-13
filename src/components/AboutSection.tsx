@@ -26,30 +26,30 @@ const AboutSection = () => {
           {/* About Text */}
           <div className="space-y-6 animate-fade-in-up">
             <h2 className="text-5xl font-black leading-tight" style={{ fontFamily: 'Impact, sans-serif' }}>
-              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Con FOTOPRIX,
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Con ARTE E IDEAS,
               </span>
               <br />
               <span className="text-foreground">
-                tus fotos serán aún más especiales
+                tus ideas cobran vida
               </span>
             </h2>
 
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                <strong className="text-foreground">Fotoprix</strong> es tu estudio fotográfico de confianza donde transformamos momentos en recuerdos tangibles que duran para siempre.
+                <strong className="text-foreground">Arte e Ideas</strong> es tu partner creativo donde transformamos conceptos en realidad con diseño profesional y productos de alta calidad.
               </p>
               
               <p>
-                Desde hace años, nos especializamos en crear productos fotográficos personalizados de alta calidad. Ya sea que busques imprimir tus fotos favoritas, diseñar regalos únicos o decorar tu hogar con tus mejores recuerdos, estamos aquí para hacer realidad tus ideas.
+                Desde hace años, nos especializamos en diseño creativo, creación de flyers, impresiones fotográficas y enmarcados artísticos. Ya sea que necesites material publicitario impactante, productos personalizados únicos o enmarcar tus fotografías favoritas, estamos aquí para dar vida a tu visión.
               </p>
               
               <p>
-                Nuestro compromiso es ofrecerte la mejor calidad de impresión, materiales premium y un servicio excepcional. Cada producto es cuidadosamente elaborado con atención al detalle para garantizar que tus fotos luzcan espectaculares.
+                Nuestro compromiso es ofrecerte diseños innovadores, impresiones de calidad superior, materiales premium y un servicio excepcional. Cada proyecto es cuidadosamente elaborado con atención al detalle para garantizar resultados que superen tus expectativas.
               </p>
 
               <p className="font-semibold text-primary italic">
-                "Imprimiendo la vida local - Tus recuerdos, nuestra pasión"
+                "Diseño que inspira - Tu creatividad, nuestra pasión"
               </p>
             </div>
           </div>
