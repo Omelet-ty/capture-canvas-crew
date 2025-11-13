@@ -20,6 +20,8 @@ import calendarImage from "@/assets/product-calendar.jpg";
 import calendarAltImage from "@/assets/product-calendar-alt.jpg";
 import magnetsImage from "@/assets/product-magnets.jpg";
 import magnetsAltImage from "@/assets/product-magnets-alt.jpg";
+import frameImage from "@/assets/product-frame.jpg";
+import frameAltImage from "@/assets/product-frame-alt.jpg";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
@@ -85,6 +87,16 @@ const ProductsSection = () => {
       badge: "¡Regalo!",
       badgeVariant: "default" as const,
     },
+    {
+      image: frameImage,
+      altImage: frameAltImage,
+      title: "ENMARCADO PROFESIONAL",
+      description: "Convierte tus fotos en obras de arte! Marcos de alta calidad con acabados premium.",
+      price: "34.95€",
+      oldPrice: "44.95€",
+      badge: "¡Premium!",
+      badgeVariant: "secondary" as const,
+    },
   ];
 
   return (
@@ -92,7 +104,7 @@ const ProductsSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 font-display">
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               ¡CREA REGALOS MEMORABLES!
             </span>
           </h2>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-collage.jpg";
-import fotoprixLogo from "@/assets/fotoprix-logo.jpg";
+import arteideasLogo from "@/assets/arteideas-logo.png";
 import {
   Carousel,
   CarouselContent,
@@ -47,18 +47,15 @@ const Hero = () => {
           }}
         >
           <CarouselContent>
-            {/* Slide 1 - Fotoprix Logo */}
+            {/* Slide 1 - Arte e Ideas Logo */}
             <CarouselItem>
               <div className="text-center animate-fade-in-up py-12">
-                <div className="mb-8 max-w-4xl mx-auto">
-                  <h1 className="text-8xl md:text-9xl font-black mb-4" style={{ fontFamily: 'Impact, sans-serif', letterSpacing: '0.05em' }}>
-                    <span className="bg-gradient-to-r from-sky-400 via-primary to-secondary bg-clip-text text-transparent drop-shadow-2xl">
-                      FOTOPR
-                    </span>
-                    <span className="bg-gradient-to-r from-secondary via-accent to-sky-400 bg-clip-text text-transparent drop-shadow-2xl">
-                      IX
-                    </span>
-                  </h1>
+                <div className="mb-8 max-w-4xl mx-auto flex justify-center">
+                  <img 
+                    src={arteideasLogo} 
+                    alt="Arte e Ideas - Diseño Creativo" 
+                    className="w-full max-w-2xl h-auto drop-shadow-2xl"
+                  />
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -90,12 +87,12 @@ const Hero = () => {
             <CarouselItem>
               <div className="text-center animate-fade-in-up py-12">
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                     ¡CAPTURA, CREA Y VIVE
                   </span>
                   <br />
                   <span className="text-foreground">
-                    TUS MEJORES MOMENTOS!
+                    TUS MEJORES MOMENTOS
                   </span>
                 </h1>
 

@@ -11,16 +11,16 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <Camera className="text-primary" size={32} />
               <h3 className="text-3xl font-black" style={{ fontFamily: 'Impact, sans-serif' }}>
-                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  FOTOPRIX
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  ARTE E IDEAS
                 </span>
               </h3>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Capturamos momentos, creamos recuerdos inolvidables y convertimos tus fotografías en arte.
+              Diseño creativo que da vida a tus ideas. Flyers, productos personalizados y enmarcados de alta calidad.
             </p>
             <p className="text-primary font-semibold italic text-sm">
-              Imprimiendo la vida local
+              Diseño que inspira
             </p>
           </div>
 
@@ -40,7 +40,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-slate-300 hover:text-primary transition-colors">
                 <Mail size={18} className="flex-shrink-0" />
-                <span>hola@fotoprix.com</span>
+                <span>hola@arteideas.com</span>
               </div>
             </div>
 

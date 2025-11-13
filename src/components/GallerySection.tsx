@@ -36,15 +36,15 @@ const GallerySection = () => {
             </p>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              CAPTURA TUS MOMENTOS<br />EN FLYERS CREATIVOS
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              DISEÑO CREATIVO Y<br />FLYERS QUE IMPACTAN
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Diseño visual que comunica, arte que destaca
+            Comunicación visual que marca la diferencia
           </p>
           <p className="text-lg text-muted-foreground italic mt-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
-            "Cada imagen cuenta tu historia de forma única"
+            "Cada diseño cuenta tu historia de forma única"
           </p>
         </div>
 
