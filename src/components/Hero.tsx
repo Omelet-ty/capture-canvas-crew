@@ -54,7 +54,7 @@ const Hero = () => {
                   <img 
                     src={arteideasLogo} 
                     alt="Arte e Ideas - Diseño Creativo" 
-                    className="w-full max-w-2xl h-auto drop-shadow-2xl"
+                    className="w-full max-w-2xl h-auto drop-shadow-2xl mix-blend-multiply dark:mix-blend-lighten opacity-90"
                   />
                 </div>
 

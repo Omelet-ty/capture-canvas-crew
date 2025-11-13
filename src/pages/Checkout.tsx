@@ -5,27 +5,35 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CreditCard, Lock } from "lucide-react";
-import { NavLink } from "@/components/NavLink";
+import Header from "@/components/Header";
+import { useCart } from "@/contexts/CartContext";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { product, quantity, total } = location.state || {};
+  const { items, getTotal, clearCart } = useCart();
+  const { cartItems } = location.state || { cartItems: items };
   
   const [cardNumber, setCardNumber] = useState("");
   const [cardName, setCardName] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simulate payment processing
-    setTimeout(() => {
-      navigate("/order-confirmation", {
-        state: { product, quantity, total }
-      });
-    }, 1500);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    clearCart();
+    
+    navigate("/order-confirmation", { 
+      state: { 
+        items: cartItems,
+        total: getTotal(),
+        cardLastDigits: cardNumber.slice(-4)
+      } 
+    });
   };
 
   const formatCardNumber = (value: string) => {
@@ -36,16 +44,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
-      {/* Navigation */}
-      <nav className="bg-background/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-8">
-            <NavLink to="/" className="text-2xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              FOTOPRIX
-            </NavLink>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         <h1 className="text-5xl font-black text-center mb-12" style={{ fontFamily: 'Impact, sans-serif' }}>
@@ -59,33 +58,30 @@ const Checkout = () => {
           <Card className="p-6 space-y-6 h-fit">
             <h2 className="text-2xl font-bold border-b pb-4">Resumen del Pedido</h2>
             
-            <div className="flex gap-4">
-              <img 
-                src={product?.image} 
-                alt={product?.title}
-                className="w-24 h-24 object-cover rounded-lg"
-              />
-              <div className="flex-1">
-                <h3 className="font-bold text-sm">{product?.title}</h3>
-                <p className="text-sm text-muted-foreground mt-1">Cantidad: {quantity}</p>
-                <p className="text-sm text-muted-foreground">Precio unitario: {product?.price}€</p>
+            {cartItems.map((item: any) => (
+              <div key={item.id} className="flex gap-4 border-b pb-4 last:border-0">
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className="w-20 h-20 object-cover rounded"
+                />
+                <div className="flex-1">
+                  <h3 className="font-semibold text-sm">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">Cantidad: {item.quantity}</p>
+                  {item.color && (
+                    <p className="text-sm text-muted-foreground">Color: {item.color}</p>
+                  )}
+                  <p className="text-sm font-bold text-primary">
+                    {(item.price * item.quantity).toFixed(2)}€
+                  </p>
+                </div>
               </div>
-            </div>
+            ))}
 
             <div className="space-y-2 pt-4 border-t">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal:</span>
-                <span className="font-semibold">{(product?.price * quantity).toFixed(2)}€</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Descuento:</span>
-                <span className="font-semibold text-green-600">
-                  -{(product?.price * quantity - parseFloat(total)).toFixed(2)}€
-                </span>
-              </div>
-              <div className="flex justify-between text-xl font-bold pt-2 border-t">
+              <div className="flex justify-between text-xl font-bold">
                 <span>Total:</span>
-                <span className="text-primary">{total}€</span>
+                <span className="text-primary">{getTotal().toFixed(2)}€</span>
               </div>
             </div>
           </Card>
@@ -163,7 +159,7 @@ const Checkout = () => {
                 className="w-full gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-xl py-6 rounded-full font-bold mt-8"
               >
                 <Lock className="mr-2" size={20} />
-                Confirmar Pago {total}€
+                Confirmar Pago {getTotal().toFixed(2)}€
               </Button>
 
               <p className="text-xs text-center text-muted-foreground mt-4">

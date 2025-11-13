@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import { NavLink } from "@/components/NavLink";
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 import mugImage from "@/assets/product-mug.jpg";
 import mugAltImage from "@/assets/product-mug-alt.jpg";
 import puzzleImage from "@/assets/product-puzzle.jpg";
@@ -21,6 +23,7 @@ import calendarAltImage from "@/assets/product-calendar-alt.jpg";
 const ProductDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -88,28 +91,21 @@ const ProductDetail = () => {
     return (product.price * quantity * (1 - discount)).toFixed(2);
   };
 
-  const handleCheckout = () => {
-    navigate("/checkout", { 
-      state: { 
-        product, 
-        quantity, 
-        total: calculateTotal() 
-      } 
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.title,
+      title: product.title,
+      image: product.image,
+      price: product.price,
+      quantity: quantity,
     });
+    
+    toast.success(`${quantity} ${product.title} agregado${quantity > 1 ? 's' : ''} al carrito`);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
-      {/* Navigation */}
-      <nav className="bg-background/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-8">
-            <NavLink to="/" className="text-2xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              FOTOPRIX
-            </NavLink>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -199,10 +195,10 @@ const ProductDetail = () => {
             <Button 
               size="lg"
               className="w-full gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-xl py-8 rounded-full font-bold"
-              onClick={handleCheckout}
+              onClick={handleAddToCart}
             >
               <ShoppingCart className="mr-2" size={24} />
-              Proceder al pago
+              Agregar al Carrito
             </Button>
           </div>
         </div>
