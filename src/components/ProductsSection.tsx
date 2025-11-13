@@ -22,6 +22,12 @@ import magnetsImage from "@/assets/product-magnets.jpg";
 import magnetsAltImage from "@/assets/product-magnets-alt.jpg";
 import frameImage from "@/assets/product-frame.jpg";
 import frameAltImage from "@/assets/product-frame-alt.jpg";
+import frameInicialImage from "@/assets/frame-inicial.jpg";
+import frameInicialAltImage from "@/assets/frame-inicial-alt.jpg";
+import framePrimariaImage from "@/assets/frame-primaria.jpg";
+import framePrimariaAltImage from "@/assets/frame-primaria-alt.jpg";
+import frameSecundariaImage from "@/assets/frame-secundaria.jpg";
+import frameSecundariaAltImage from "@/assets/frame-secundaria-alt.jpg";
 
 const ProductsSection = () => {
   const navigate = useNavigate();
@@ -96,6 +102,36 @@ const ProductsSection = () => {
       oldPrice: "44.95€",
       badge: "¡Premium!",
       badgeVariant: "secondary" as const,
+    },
+    {
+      image: frameInicialImage,
+      altImage: frameInicialAltImage,
+      title: "MARCO GRADUACIÓN INICIAL",
+      description: "¡Celebra los primeros logros! Marco especial para graduación de inicial con diseño colorido y alegre.",
+      price: "29.95€",
+      oldPrice: "39.95€",
+      badge: "¡Promo!",
+      badgeVariant: "default" as const,
+    },
+    {
+      image: framePrimariaImage,
+      altImage: framePrimariaAltImage,
+      title: "MARCO GRADUACIÓN PRIMARIA",
+      description: "¡Recuerdo inolvidable! Marco especial para graduación de primaria con temática educativa vibrante.",
+      price: "32.95€",
+      oldPrice: "42.95€",
+      badge: "¡Nuevo!",
+      badgeVariant: "secondary" as const,
+    },
+    {
+      image: frameSecundariaImage,
+      altImage: frameSecundariaAltImage,
+      title: "MARCO GRADUACIÓN SECUNDARIA",
+      description: "¡Momento especial! Marco elegante para graduación de secundaria con acabado sofisticado y premium.",
+      price: "39.95€",
+      oldPrice: "49.95€",
+      badge: "¡Premium!",
+      badgeVariant: "destructive" as const,
     },
   ];
 

@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import arteideasLogo from "@/assets/arteideas-logo.png";
+import { useCart } from "@/contexts/CartContext";
+import CartView from "./CartView";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const cartItemsCount = 0; // This will be managed by cart context
+  const { items } = useCart();
+  const cartItemsCount = items.length;
 
   const navigationLinks = [
     { name: "Hogar", href: "/", icon: Home },
@@ -32,7 +35,7 @@ const Header = () => {
           <img 
             src={arteideasLogo} 
             alt="Arte e Ideas - Diseño Creativo" 
-            className="h-12 w-auto"
+            className="h-12 w-auto mix-blend-multiply dark:mix-blend-lighten"
           />
         </Link>
 
@@ -76,14 +79,11 @@ const Header = () => {
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
               <SheetHeader>
                 <SheetTitle>Carrito de Compras</SheetTitle>
               </SheetHeader>
-              <div className="mt-8 text-center text-muted-foreground">
-                <ShoppingCart size={48} className="mx-auto mb-4 opacity-20" />
-                <p>Tu carrito está vacío</p>
-              </div>
+              <CartView />
             </SheetContent>
           </Sheet>
 
