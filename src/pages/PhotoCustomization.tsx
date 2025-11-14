@@ -25,22 +25,30 @@ const PhotoCustomization = () => {
   const [quantity, setQuantity] = useState(1);
   const [filter, setFilter] = useState("none");
   const [cropMode, setCropMode] = useState(false);
+  const [showSizeConfig, setShowSizeConfig] = useState(false);
   const [cropArea, setCropArea] = useState({ x: 0, y: 0, width: 100, height: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [selectedColor, setSelectedColor] = useState("#ffffff");
 
   const product = location.state?.product;
 
   const sizes = [
-    { value: "9x13", label: "9x13", price: 0.70 },
-    { value: "10x15", label: "10x15", price: 0.75 },
-    { value: "11x15", label: "11x15", price: 0.80 },
-    { value: "13x13", label: "13x13", price: 0.85 },
-    { value: "13x18", label: "13x18", price: 0.90 },
-    { value: "15x15", label: "15x15", price: 0.95 },
-    { value: "15x20", label: "15x20", price: 1.00 },
-    { value: "20x20", label: "20x20", price: 1.20 },
+    { value: "9x13", label: "9x13 cm", price: 0.70 },
+    { value: "10x15", label: "10x15 cm", price: 0.75 },
+    { value: "11x15", label: "11x15 cm", price: 0.80 },
+    { value: "13x13", label: "13x13 cm", price: 0.85 },
+    { value: "13x18", label: "13x18 cm", price: 0.90 },
+    { value: "15x15", label: "15x15 cm", price: 0.95 },
+    { value: "15x20", label: "15x20 cm", price: 1.00 },
+    { value: "20x20", label: "20x20 cm", price: 1.20 },
     { value: "personalizado", label: "Personalizado", price: 1.50 },
+  ];
+
+  const colorPalette = [
+    "#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF",
+    "#FFFF00", "#FF00FF", "#00FFFF", "#FFA500", "#800080",
+    "#FFC0CB", "#A52A2A", "#808080", "#FFD700", "#C0C0C0",
   ];
 
   const filters = [
@@ -215,14 +223,25 @@ const PhotoCustomization = () => {
       height = h * 10;
     }
     
-    // Adjust to maintain aspect ratio and fit within image
-    const maxWidth = Math.min(width, image.width);
-    const maxHeight = Math.min(height, image.height);
+    // Calculate scaled dimensions while maintaining aspect ratio
+    const aspectRatio = width / height;
+    const imageAspect = image.width / image.height;
+    
+    let newWidth, newHeight;
+    
+    if (aspectRatio > imageAspect) {
+      newWidth = Math.min(width * 5, image.width * 0.8);
+      newHeight = newWidth / aspectRatio;
+    } else {
+      newHeight = Math.min(height * 5, image.height * 0.8);
+      newWidth = newHeight * aspectRatio;
+    }
     
     setCropArea(prev => ({
-      ...prev,
-      width: maxWidth,
-      height: maxHeight,
+      x: (image.width - newWidth) / 2,
+      y: (image.height - newHeight) / 2,
+      width: newWidth,
+      height: newHeight,
     }));
   };
 
@@ -326,7 +345,10 @@ const PhotoCustomization = () => {
                   <div className="flex gap-2">
                     <Button
                       variant={cropMode ? "default" : "outline"}
-                      onClick={() => setCropMode(!cropMode)}
+                      onClick={() => {
+                        setCropMode(!cropMode);
+                        setShowSizeConfig(!showSizeConfig);
+                      }}
                       className="flex-1"
                     >
                       <Scissors className="mr-2" size={18} />
@@ -359,48 +381,86 @@ const PhotoCustomization = () => {
 
           {/* Configuration Section */}
           <div className="space-y-6">
+            {showSizeConfig && (
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4">Configuración de Recorte</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <Label className="mb-2 block">Formatos</Label>
+                    <RadioGroup value={selectedSize} onValueChange={(value) => {
+                      setSelectedSize(value);
+                      if (value !== "personalizado") {
+                        setTimeout(updateCropSize, 100);
+                      }
+                    }}>
+                      {sizes.map((size) => (
+                        <div key={size.value} className="flex items-center space-x-2">
+                          <RadioGroupItem value={size.value} id={size.value} />
+                          <Label htmlFor={size.value} className="flex-1 cursor-pointer">
+                            {size.label} - {size.price}€
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+
+                  {selectedSize === "personalizado" && (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="custom-width">Ancho (cm)</Label>
+                          <Input
+                            id="custom-width"
+                            type="number"
+                            value={customWidth}
+                            onChange={(e) => setCustomWidth(e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="custom-height">Alto (cm)</Label>
+                          <Input
+                            id="custom-height"
+                            type="number"
+                            value={customHeight}
+                            onChange={(e) => setCustomHeight(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <Button 
+                        onClick={updateCropSize}
+                        className="w-full"
+                        variant="outline"
+                      >
+                        Aplicar Dimensiones Personalizadas
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            )}
+
             <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Configuración</h3>
+              <h3 className="text-xl font-bold mb-4">Detalles del Producto</h3>
               
               <div className="space-y-4">
                 <div>
-                  <Label className="mb-2 block">Formatos</Label>
-                  <RadioGroup value={selectedSize} onValueChange={setSelectedSize}>
-                    {sizes.map((size) => (
-                      <div key={size.value} className="flex items-center space-x-2">
-                        <RadioGroupItem value={size.value} id={size.value} />
-                        <Label htmlFor={size.value} className="flex-1 cursor-pointer">
-                          {size.label} - {size.price}€
-                        </Label>
-                      </div>
+                  <Label className="mb-2 block">Color del Producto</Label>
+                  <div className="grid grid-cols-5 gap-2">
+                    {colorPalette.map((color) => (
+                      <button
+                        key={color}
+                        onClick={() => setSelectedColor(color)}
+                        className={`w-12 h-12 rounded border-2 transition-all ${
+                          selectedColor === color ? "border-primary scale-110 shadow-lg" : "border-border hover:scale-105"
+                        }`}
+                        style={{ backgroundColor: color }}
+                        title={color}
+                      />
                     ))}
-                  </RadioGroup>
-                </div>
-
-                {selectedSize === "personalizado" && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="custom-width">Ancho (cm)</Label>
-                      <Input
-                        id="custom-width"
-                        type="number"
-                        value={customWidth}
-                        onChange={(e) => setCustomWidth(e.target.value)}
-                        onBlur={updateCropSize}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="custom-height">Alto (cm)</Label>
-                      <Input
-                        id="custom-height"
-                        type="number"
-                        value={customHeight}
-                        onChange={(e) => setCustomHeight(e.target.value)}
-                        onBlur={updateCropSize}
-                      />
-                    </div>
                   </div>
-                )}
+                  <p className="text-sm text-muted-foreground mt-2">Color seleccionado: {selectedColor}</p>
+                </div>
 
                 <div>
                   <Label htmlFor="paper-type">Tipo de Papel</Label>

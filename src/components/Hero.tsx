@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-collage.jpg";
-import arteideasLogo from "@/assets/arteideas-logo-new.png";
+import arteideasLogo from "@/assets/arteideas-logo.png";
 import {
   Carousel,
   CarouselContent,

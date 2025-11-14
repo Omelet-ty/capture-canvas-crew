@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import arteideasLogo from "@/assets/arteideas-logo-new.png";
+import arteideasLogo from "@/assets/arteideas-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import CartView from "./CartView";
 
