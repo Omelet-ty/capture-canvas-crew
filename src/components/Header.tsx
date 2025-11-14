@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import arteideasLogo from "@/assets/arteideas-logo.png";
+import arteideasLogo from "@/assets/arteideas-logo-new.png";
 import { useCart } from "@/contexts/CartContext";
 import CartView from "./CartView";
 
@@ -35,7 +35,7 @@ const Header = () => {
           <img 
             src={arteideasLogo} 
             alt="Arte e Ideas - Diseño Creativo" 
-            className="h-12 w-auto mix-blend-multiply dark:mix-blend-lighten"
+            className="h-12 w-auto drop-shadow-md"
           />
         </Link>
 

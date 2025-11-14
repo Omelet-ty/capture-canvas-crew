@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-collage.jpg";
-import arteideasLogo from "@/assets/arteideas-logo.png";
+import arteideasLogo from "@/assets/arteideas-logo-new.png";
 import {
   Carousel,
   CarouselContent,
@@ -54,7 +54,7 @@ const Hero = () => {
                   <img 
                     src={arteideasLogo} 
                     alt="Arte e Ideas - Diseño Creativo" 
-                    className="w-full max-w-2xl h-auto drop-shadow-2xl mix-blend-multiply dark:mix-blend-lighten opacity-90"
+                    className="w-full max-w-2xl h-auto drop-shadow-2xl"
                   />
                 </div>
 
