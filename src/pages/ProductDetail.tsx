@@ -195,10 +195,10 @@ const ProductDetail = () => {
             <Button 
               size="lg"
               className="w-full gradient-vibrant text-white hover:opacity-90 transition-all shadow-glow-primary text-xl py-8 rounded-full font-bold"
-              onClick={handleAddToCart}
+              onClick={() => navigate("/customize", { state: { product } })}
             >
               <ShoppingCart className="mr-2" size={24} />
-              Agregar al Carrito
+              Empezar a Crear Online
             </Button>
           </div>
         </div>
